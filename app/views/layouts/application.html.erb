@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/4d4944ebca.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+  </head>
+
+  <body>
+    <header class = "mb-3">
+      <nav class = "navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class = "container">
+          <span><%= link_to "Bookers", root_path, class: 'navbar-brand text-white' %></span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-house"></i> Home
+              <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to users_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-users"></i> Users
+              <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to books_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-book-open"></i> Books
+              <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-right-from-bracket"></i> Log out
+              <% end %>
+              </li>
+              </div>
+            </nav>
+               <% else %>
+              <li class="nav-item">
+                <%= link_to root_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-house"></i> Home
+              <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to about_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-link"></i> About
+              <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-user-plus"></i> Sign up
+              <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                <i class="fa-solid fa-right-to-bracket"></i> Log in
+              <% end %>
+              </li>
+              <% end %>
+          </header>
+      <div class = "container px-5 px-sm-0">
+        <%= yield %>
+      </div>
+        
+      <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+      </footer>
+      
+  </body>
+</html>
