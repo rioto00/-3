@@ -1,0 +1,24 @@
+<table class = "table">
+  <tr>
+    <th>image</th>
+    <th>name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+  <% users.each do |user| %>
+  
+  <tr>
+    <td>
+    <%= image_tag(user.get_profile_image, height: 80, width: 80) %>
+    </td>
+    <td><%= user.name %></td>
+    <td>フォロー数: <%= user.followings.count %></td>
+    <td>フォロワー数: <%= user.followers.count %></td>
+    <td><%= render "relationships/relationships", user: user, options: { class: "follow-link" } %></td>
+    <td><%= link_to "Show", user_path(user.id) %></td>
+  </tr>
+  <% end %>
+</table>
