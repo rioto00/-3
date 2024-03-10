@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :rooms, through: :entries
   has_one_attached :profile_image
   
   validates :name, uniqueness: true, length: { in: 2..20 }
@@ -47,6 +50,10 @@ class User < ApplicationRecord
     else
       User.where('name LIKE ?', '%' + content + '%')
     end
+  end
+  
+  def following?(user)
+    followings.include?(user)
   end
   
 end
